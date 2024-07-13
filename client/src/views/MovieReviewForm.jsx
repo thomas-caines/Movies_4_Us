@@ -62,9 +62,9 @@ export function MovieReviewForm() {
         <div className='movieReviewForm'>
             <Header />
 
-            <div className='reviewForm'>
-                <h1> {movie.title} </h1>
-            </div>
+            {/* <div className='reviewForm'> */}
+                <h1 className='reviewForm'> {movie.title} </h1>
+            {/* </div> */}
                 <div className='reviewForm_Holder'>
                     <h2>Review:</h2>
                     <Form onSubmit={submitHandler}>

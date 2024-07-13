@@ -4,6 +4,7 @@ import { Router } from 'express';
 import {
     createReview,
     getAllReviews,
+    getAllReviewsByMovieId,
     getOneReviewById,
     updateOneReviewById,
     deleteOneReviewById,
@@ -20,5 +21,8 @@ const reviewRouter = Router()
         .get( getOneReviewById )
         .put( updateOneReviewById )
         .delete( deleteOneReviewById )
+
+    reviewRouter.route('/movie/:id')
+        .get( getAllReviewsByMovieId )
 
 export default reviewRouter

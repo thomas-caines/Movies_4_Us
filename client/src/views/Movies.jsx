@@ -26,14 +26,14 @@ export function Movies() {
             })
             .catch(err => console.error(err));
     },[])
-
+// remove line 36, then add the padding and other css to the card
     return(
         <div className="moviesPage">
             <Header />
             <div className="movieCard_Holder" >
                 {
                     movies.map( ({title, poster_path, id}) => (
-                        <div className="movieCard" key={id}>
+                        <div className="movieCard" key={id}> 
                             <Card className="moiveCard_Card">
                                 <Link to={`/movies/${id}`}> 
                                     <Card.Img className="movieCard_Img" variant="top" src={`https://image.tmdb.org/t/p/w500/${poster_path}`} />

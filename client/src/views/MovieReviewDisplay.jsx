@@ -13,7 +13,7 @@ export function MovieReviewDisplay() {
     const [errors, setErrors] = useState({})
     const [review, setReview] = useState({})
 
-    const { id, review_id } = useParams()
+    const { review_id } = useParams()
     const navigate = useNavigate()
 
     useEffect( () => {
@@ -24,19 +24,15 @@ export function MovieReviewDisplay() {
               Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNWVjMDBkY2JhYWU0Mjk1NWMzMDQxZDZkMTI5NmI0YyIsIm5iZiI6MTcxOTI1MTcwOC43ODM5NTgsInN1YiI6IjY2NzMyMmRjYWNiYTRiYTlhYWQ4MDRiYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QqhTrO9vhWuAfREWRhotyTUyLAo0jeItdTeGUWtJYjs'
             }
           };
-          
-          fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
+        getOneReviewById(review_id)
+        .then(res => {
+            setReview(res)
+            fetch(`https://api.themoviedb.org/3/movie/${res.movie_id}?language=en-US`, options) //create services file to include this
             .then(response => response.json())
             .then(response => {
                 setMovie(response)
             })
             .catch(err => console.error(err));
-    },[id])
-
-    useEffect( () => {
-        getOneReviewById(review_id)
-        .then(res => {
-            setReview(res)
         })
         .catch( () => {} )
     },[])
@@ -76,11 +72,11 @@ export function MovieReviewDisplay() {
         <div className='movieReviewForm'>
             <Header />
 
-            <div className='reviewForm'>
-                <h1> Review for: {movie.title} </h1>
-            </div>
+            {/* <div className='reviewForm'> */}
+                <h1 className='reviewForm'> Review for: {movie.title} </h1>
+            {/* </div> */}
                 <div className='reviewForm_Holder'>
-                    <h3>Review:</h3>
+                    <h2>Review:</h2>
                     <Form onSubmit={submitHandler}>
                         <Form.Group>
                         <Form.Label className="reviewForm_Label" >Rating: 1-10:</Form.Label>

@@ -21,6 +21,15 @@ import ReviewModel from '../models/review.model.js';
         }
     }
 
+    async function getAllReviewsByMovieId(req, res) {
+        try {
+            const allReviews = await ReviewModel.find({ movie_id: req.params.id })
+            res.status(200).json(allReviews)
+        } catch (error) {
+            res.status(400).json(error)
+        }
+    }
+
     async function getOneReviewById(req, res) {
         try {
             const foundReview = await ReviewModel.findById(req.params.id)
@@ -58,6 +67,7 @@ import ReviewModel from '../models/review.model.js';
     export {
         createReview,
         getAllReviews,
+        getAllReviewsByMovieId,
         getOneReviewById,
         updateOneReviewById,
         deleteOneReviewById,

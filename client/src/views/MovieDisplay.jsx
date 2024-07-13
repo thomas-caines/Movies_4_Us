@@ -1,6 +1,6 @@
 // From Other Files 
 import { Header } from '../components/Header';
-import { getAllReviews } from '../services/Movies.Services';
+import { getAllReviews, getAllReviewsByMovieId } from '../services/Movies.Services';
 // From Dependencies
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -12,8 +12,6 @@ import Image from 'react-bootstrap/Image';
 export function MovieDisplay() {
     const [movie, setMovie] = useState({})
     const [reviews, setReviews] = useState([])
-    const [filteredReviews, setFilteredReviews] = useState([])
-
     const { id } = useParams()
 
     useEffect( () => {
@@ -34,17 +32,12 @@ export function MovieDisplay() {
     },[id])
 
     useEffect( () => {
-        getAllReviews()
+        getAllReviewsByMovieId(id)
         .then(res => {
             setReviews(res)
         })
         .catch( () => {} )
     },[])
-
-    useEffect( () => {
-        let filteredReviews = reviews.filter( (review) => review.movie_id == id )
-        setFilteredReviews(filteredReviews)
-    },[reviews] )
 
 
 
@@ -71,8 +64,8 @@ export function MovieDisplay() {
                 <div className='movieReviews'>
                     <h3 className='movieReviews_h3'>Reviews:</h3>
                     {
-                        filteredReviews.map( (review) => (
-                            <div className='movieReviews_Review' key={review.id}>
+                        reviews.map( (review) => (
+                            <div className='movieReviews_Review' key={review._id}>
                                     <h3> Rating: { review.rating } </h3>
                                     <p> {review.review_body} </p>
                                     {
@@ -80,7 +73,7 @@ export function MovieDisplay() {
                                         ? <p> Recommendation: Give it a watch </p>
                                         : <p> Recommendation: Don't waste your time </p>
                                     }
-                                <Link className='movieContainer_Link' to={`/movies/review/display/${id}/${review._id}`}>
+                                <Link className='movieContainer_Link' to={`/movies/review/display/${review._id}`}>
                                     Go to Review
                                 </Link>
                             </div>
