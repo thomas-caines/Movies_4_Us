@@ -1,9 +1,7 @@
 // From Dependencies
 import Carousel from 'react-bootstrap/Carousel';
 // From Other Files
-import { One } from './carouselMovies/One';
-import { CarouselItem } from './carouselMovies/CarouselItem';
-import { Three } from './carouselMovies/Three';
+import { CarouselItem } from './CarouselItem'
 import { useState, useEffect } from 'react';
 
 export function MovieCarousel() {
