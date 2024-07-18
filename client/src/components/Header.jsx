@@ -4,18 +4,18 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 export function Header() {
-    return(
+    return (
         <div>
-            <Navbar className='navbar' >
+            <Navbar>
                 <Container>
-                    <Navbar.Brand className='navbar_Brand' >
+                    <Navbar.Brand>
                         Movies 4 Us
                     </Navbar.Brand>
-                    <Navbar.Toggle aria-controls='basic-navbar-nav' />
+                    <Navbar.Toggle />
                     <Navbar.Collapse>
                         <Nav>
-                            <Nav.Link className='navbar_Link' href='/'>Home</Nav.Link>
-                            <Nav.Link className='navbar_Link' href='/movies'>Movies</Nav.Link>
+                            <Nav.Link href='/'>Home</Nav.Link>
+                            <Nav.Link href='/movies'>Movies</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

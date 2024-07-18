@@ -11,18 +11,18 @@ import {
 } from '../controllers/review.controller.js';
 
 const reviewRouter = Router()
-    // No Id Routes
-    reviewRouter.route('/')
-        .post( createReview )
-        .get( getAllReviews )
+// No Id Routes
+reviewRouter.route('/')
+    .post(createReview)
+    .get(getAllReviews)
 
-    // Id Routes
-    reviewRouter.route('/:id')
-        .get( getOneReviewById )
-        .put( updateOneReviewById )
-        .delete( deleteOneReviewById )
+// Id Routes
+reviewRouter.route('/:id')
+    .get(getOneReviewById)
+    .put(updateOneReviewById)
+    .delete(deleteOneReviewById)
 
-    reviewRouter.route('/movie/:id')
-        .get( getAllReviewsByMovieId )
+reviewRouter.route('/movie/:id')
+    .get(getAllReviewsByMovieId)
 
 export default reviewRouter

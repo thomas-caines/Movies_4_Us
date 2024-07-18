@@ -1,6 +1,6 @@
 // From Other Files 
 import { Header } from '../components/Header';
-import { getAllReviews, getAllReviewsByMovieId } from '../services/Movies.Services';
+import { getAllReviewsByMovieId } from '../services/Movies.Services';
 // From Dependencies
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -14,72 +14,72 @@ export function MovieDisplay() {
     const [reviews, setReviews] = useState([])
     const { id } = useParams()
 
-    useEffect( () => {
+    useEffect(() => {
         const options = {
             method: 'GET',
             headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNWVjMDBkY2JhYWU0Mjk1NWMzMDQxZDZkMTI5NmI0YyIsIm5iZiI6MTcxOTI1MTcwOC43ODM5NTgsInN1YiI6IjY2NzMyMmRjYWNiYTRiYTlhYWQ4MDRiYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QqhTrO9vhWuAfREWRhotyTUyLAo0jeItdTeGUWtJYjs'
+                accept: 'application/json',
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNWVjMDBkY2JhYWU0Mjk1NWMzMDQxZDZkMTI5NmI0YyIsIm5iZiI6MTcxOTI1MTcwOC43ODM5NTgsInN1YiI6IjY2NzMyMmRjYWNiYTRiYTlhYWQ4MDRiYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QqhTrO9vhWuAfREWRhotyTUyLAo0jeItdTeGUWtJYjs'
             }
-          };
-          
-          fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
+        };
+
+        fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
             .then(response => response.json())
             .then(response => {
                 setMovie(response)
             })
             .catch(err => console.error(err));
-    },[id])
+    }, [id])
 
-    useEffect( () => {
+    useEffect(() => {
         getAllReviewsByMovieId(id)
-        .then(res => {
-            setReviews(res)
-        })
-        .catch( () => {} )
-    },[])
+            .then(res => {
+                setReviews(res)
+            })
+            .catch(() => { })
+    }, [])
 
 
 
-    return(
-        <div className='movieDisplay' >
+    return (
+        <div>
             <Header />
 
-            <Container className='movieContainer'>
+            <Container>
                 <Row>
-                    <Col className='movieContainer_Review'>
+                    <Col>
                         <h1> {movie.title} </h1>
 
                         <h2> Rating: {movie.vote_average}/10 </h2>
-                        
+
                         <p> {movie.overview} </p>
 
-                        <Link className='movieContainer_Link' to={`/movies/review/${movie.id}`}>Leave a Review</Link>
+                        <Link to={`/movies/review/${movie.id}`}>Leave a Review</Link>
                     </Col>
                     <Col>
-                       <Image src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} thumbnail />
+                        <Image src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} thumbnail />
                     </Col>
                 </Row>
                 <Row>
-                <div className='movieReviews'>
-                    <h3 className='movieReviews_h3'>Reviews:</h3>
-                    {
-                        reviews.map( (review) => (
-                            <div className='movieReviews_Review' key={review._id}>
-                                    <h3> Rating: { review.rating } </h3>
+                    <div>
+                        <h3>Reviews:</h3>
+                        {
+                            reviews.map((review) => (
+                                <div key={review._id}>
+                                    <h3> Rating: {review.rating} </h3>
                                     <p> {review.review_body} </p>
                                     {
                                         review.recommend == true
-                                        ? <p> Recommendation: Give it a watch </p>
-                                        : <p> Recommendation: Don't waste your time </p>
+                                            ? <p> Recommendation: Give it a watch </p>
+                                            : <p> Recommendation: Don't waste your time </p>
                                     }
-                                <Link className='movieContainer_Link' to={`/movies/review/display/${review._id}`}>
-                                    Go to Review
-                                </Link>
-                            </div>
-                        ) )
-                    }
-                </div>
+                                    <Link to={`/movies/review/display/${review._id}`}>
+                                        Go to Review
+                                    </Link>
+                                </div>
+                            ))
+                        }
+                    </div>
                 </Row>
             </Container>
         </div>

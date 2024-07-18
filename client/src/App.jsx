@@ -12,16 +12,12 @@ import { Routes, Route } from 'react-router-dom';
 function App() {
   return (
     <div>
-      <h1>This is for Andrew</h1>
-      <h2>For a branch
-      
-      </h2>
       <Routes>
-        <Route path='/' element={ <Home /> } />
-        <Route path='/movies' element={ <Movies /> } /> 
-        <Route path='/movies/:id' element={ <MovieDisplay /> } />
-        <Route path='/movies/review/:id' element={ <MovieReviewForm /> } />
-        <Route path='/movies/review/display/:review_id' element={ <MovieReviewDisplay /> } />
+        <Route path='/' element={<Home />} />
+        <Route path='/movies' element={<Movies />} />
+        <Route path='/movies/:id' element={<MovieDisplay />} />
+        <Route path='/movies/review/:id' element={<MovieReviewForm />} />
+        <Route path='/movies/review/display/:review_id' element={<MovieReviewDisplay />} />
       </Routes>
     </div>
   )
