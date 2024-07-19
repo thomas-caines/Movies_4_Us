@@ -31,6 +31,7 @@ export function MovieReviewDisplay() {
                     .then(response => response.json())
                     .then(response => {
                         setMovie(response)
+                        console.log('this is Movie', response)
                     })
                     .catch(err => console.error(err));
             })
@@ -52,7 +53,7 @@ export function MovieReviewDisplay() {
 
         updateOneReviewById(review)
             .then(res => {
-                navigate(`/movies/${id}`)
+                navigate(`/movies/${movie.id}`)
             })
             .catch((error) => {
                 setErrors(error.response.data.errors)
@@ -62,64 +63,67 @@ export function MovieReviewDisplay() {
 
     const deleteReview = () => {
         deleteOneReviewById(review_id)
-            .then(res => {
-                navigate(`/movies/${id}`)
+            .then(res => { 
+                navigate(`/movies/${movie.id}`)
             })
             .catch((error) => { })
     }
 
     return (
-        <div>
+        <div className="movieReviewDisplay">
             <Header />
 
+            <div className="movieReviewDisplay-Form">
+                <h1 className="movieReviewDisplay-Text-Heading"> Review for: {movie.title} </h1>
 
-            <h1> Review for: {movie.title} </h1>
+                <div>
+                    <h2 className="movieReviewDisplay-Text-Heading">Review:</h2>
+                    <Form onSubmit={submitHandler}>
+                        <Form.Group>
+                            <Form.Label className="movieReviewDisplay-Text">Rating 1-10:</Form.Label>
+                            <Form.Control
+                                className='movieReview-Input'
+                                type='number'
+                                name='rating'
+                                value={review.rating}
+                                onChange={updateInput}
+                            />
+                        </Form.Group>
 
-            <div>
-                <h2>Review:</h2>
-                <Form onSubmit={submitHandler}>
-                    <Form.Group>
-                        <Form.Label>Rating: 1-10:</Form.Label>
-                        <Form.Control
-                            type='number'
-                            name='rating'
-                            value={review.rating}
-                            onChange={updateInput}
-                        />
-                    </Form.Group>
+                        {errors.rating && <p> {errors.rating.message} </p>}
 
-                    {errors.rating && <p> {errors.rating.message} </p>}
+                        <Form.Group>
+                            <Form.Label className="movieReviewDisplay-Text">Your Thoughts:</Form.Label>
+                            <Form.Control
+                                className='movieReview-Input'
+                                as='textarea'
+                                rows={5}
+                                name='review_body'
+                                value={review.review_body}
+                                onChange={updateInput}
+                            />
+                        </Form.Group>
 
-                    <Form.Group>
-                        <Form.Label>Your Thoughts:</Form.Label>
-                        <Form.Control
-                            as='textarea'
-                            rows={5}
-                            name='review_body'
-                            value={review.review_body}
-                            onChange={updateInput}
-                        />
-                    </Form.Group>
+                        {errors.review_body && <p> {errors.review_body.message} </p>}
 
-                    {errors.review_body && <p> {errors.review_body.message} </p>}
+                        <Form.Group>
+                            <Form.Label className="movieReviewDisplay-Text">Would you recommend to others?</Form.Label>
+                            <Form.Check
+                                name='recommend'
+                                value={review.recommend}
+                                onChange={updateCheck}
+                                checked={review.recommend == true ? 'checked' : null}
+                            />
+                        </Form.Group>
 
-                    <Form.Group>
-                        <Form.Label>Would you recommend to others?</Form.Label>
-                        <Form.Check
-                            name='recommend'
-                            value={review.recommend}
-                            onChange={updateCheck}
-                            checked={review.recommend == true ? 'checked' : null}
-                        />
-                    </Form.Group>
-
-                    <Button className="reviewForm_Label" variant='primary' type='submit'>
-                        Update Review
-                    </Button>
-                </Form>
-                <Button onClick={deleteReview} className="deleteButton" variant='primary'>
-                    Delete Review
-                </Button>
+                        <button className="movieReviewDisplay-Button" variant='primary' type='submit'>
+                            Update Review
+                        </button>
+                    </Form>
+                    <button className="movieReviewDisplay-Button" onClick={deleteReview} variant='primary'>
+                        Delete Review
+                    </button>
+                </div>
             </div>
         </div>
     )

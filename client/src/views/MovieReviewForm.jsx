@@ -59,50 +59,54 @@ export function MovieReviewForm() {
     }
 
     return (
-        <div>
+        <div className='movieReview'>
             <Header />
-            <h1> {movie.title} </h1>
-            <div>
-                <h2>Review:</h2>
-                <Form onSubmit={submitHandler}>
-                    <Form.Group>
-                        <Form.Label>Rating: 1-10:</Form.Label>
-                        <Form.Control
-                            type='number'
-                            name='rating'
-                            value={review.rating}
-                            onChange={updateInput}
-                        />
-                        {errors.rating && <p> {errors.rating.message} </p>}
-                    </Form.Group>
+            <div className='movieReview-Form'>
+                <h1 className='movieReview-Text-Heading'> {movie.title} </h1>
+                <div>
+                    <h2 className='movieReview-Text-Heading'>Review:</h2>
+                    <Form onSubmit={submitHandler}>
+                        <Form.Group>
+                            <Form.Label className='movieReview-Text'>Rating: 1-10:</Form.Label>
+                            <Form.Control
+                                className='movieReview-Input'
+                                type='number'
+                                name='rating'
+                                value={review.rating}
+                                onChange={updateInput}
+                            />
+                            {errors.rating && <p> {errors.rating.message} </p>}
+                        </Form.Group>
 
 
-                    <Form.Group>
-                        <Form.Label>Your Thoughts:</Form.Label>
-                        <Form.Control
-                            as='textarea'
-                            rows={5}
-                            name='review_body'
-                            value={review.review_body}
-                            onChange={updateInput}
-                        />
-                    </Form.Group>
+                        <Form.Group>
+                            <Form.Label className='movieReview-Text'>Your Thoughts:</Form.Label>
+                            <Form.Control
+                                className='movieReview-Input'
+                                as='textarea'
+                                rows={5}
+                                name='review_body'
+                                value={review.review_body}
+                                onChange={updateInput}
+                            />
+                        </Form.Group>
 
-                    {errors.review_body && <p> {errors.review_body.message} </p>}
+                        {errors.review_body && <p> {errors.review_body.message} </p>}
 
-                    <Form.Group>
-                        <Form.Label>Would you recommend to others?</Form.Label>
-                        <Form.Check
-                            name='recommend'
-                            value={review.recommend}
-                            onChange={updateCheck}
-                        />
-                    </Form.Group>
+                        <Form.Group>
+                            <Form.Label className='movieReview-Text'>Would you recommend to others?</Form.Label>
+                            <Form.Check
+                                name='recommend'
+                                value={review.recommend}
+                                onChange={updateCheck}
+                            />
+                        </Form.Group>
 
-                    <Button variant='primary' type='submit'>
-                        Leave Review
-                    </Button>
-                </Form>
+                        <button className='movieReview-Button' variant='primary' type='submit'>
+                            Leave Review
+                        </button>
+                    </Form>
+                </div>
             </div>
         </div>
     )

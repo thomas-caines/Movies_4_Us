@@ -4,7 +4,7 @@ import { MovieCarousel } from "../components/MovieCarousel";
 
 export function Home() {
     return (
-        <div>
+        <div className="home">
             <Header />
             <MovieCarousel />
         </div>

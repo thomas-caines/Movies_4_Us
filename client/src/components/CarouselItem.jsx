@@ -7,7 +7,7 @@ export function CarouselItem({ poster }) {
     return (
         <div>
             <Link to={`/movies/${poster.id}`}>
-                <Image src={`https://image.tmdb.org/t/p/w500/${poster.poster_path}`} />
+                <Image className='carousel-Img'  src={`https://image.tmdb.org/t/p/w500/${poster.poster_path}`} />
             </Link>
         </div>
     )

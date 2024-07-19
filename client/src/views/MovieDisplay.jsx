@@ -41,44 +41,53 @@ export function MovieDisplay() {
 
 
 
+
+
     return (
-        <div>
+        <div className='movieDisplay'>
             <Header />
 
-            <Container>
+            <Container className='movieDisplay-Container'>
                 <Row>
-                    <Col>
-                        <h1> {movie.title} </h1>
+                    <Col className='movieDisplay-Info'>
+                        <h1 className='movieDisplay-Text-Heading'> {movie.title} </h1>
 
-                        <h2> Rating: {movie.vote_average}/10 </h2>
+                        <h2 className='movieDisplay-Text-Heading'> Rating: {movie.vote_average}/10 </h2>
 
-                        <p> {movie.overview} </p>
+                        <p className='movieDisplay-Text'> {movie.overview} </p>
 
-                        <Link to={`/movies/review/${movie.id}`}>Leave a Review</Link>
+                        <button className='movieDisplay-Button'>
+                            <Link to={`/movies/review/${movie.id}`}>Leave a Review</Link>
+                        </button>
+
                     </Col>
                     <Col>
-                        <Image src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} thumbnail />
+                        <Image className='movieDisplay-Image' src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
                     </Col>
                 </Row>
                 <Row>
-                    <div>
-                        <h3>Reviews:</h3>
-                        {
-                            reviews.map((review) => (
-                                <div key={review._id}>
-                                    <h3> Rating: {review.rating} </h3>
-                                    <p> {review.review_body} </p>
-                                    {
-                                        review.recommend == true
-                                            ? <p> Recommendation: Give it a watch </p>
-                                            : <p> Recommendation: Don't waste your time </p>
-                                    }
-                                    <Link to={`/movies/review/display/${review._id}`}>
-                                        Go to Review
-                                    </Link>
-                                </div>
-                            ))
-                        }
+                    <div className='movieDisplay-Reviews'>
+                        <h3 className='movieDisplay-Text-Heading'>Reviews:</h3>
+                        <div className='movieDisplay-Review-Holder'>
+                            {
+                                reviews.map((review) => (
+                                    <div className='movieDisplay-Review-Card' key={review._id}>
+                                        <h3 className='movieDisplay-Text-Heading'> Rating: {review.rating} </h3>
+                                        <p className='movieDisplay-Text'> {review.review_body} </p>
+                                        {
+                                            review.recommend == true
+                                                ? <p className='movieDisplay-Text'> Recommendation: Give it a watch </p>
+                                                : <p className='movieDisplay-Text'> Recommendation: Don't waste your time </p>
+                                        }
+                                        <button className='movieDisplay-Button'>
+                                            <Link to={`/movies/review/display/${review._id}`}>
+                                                Go to Review
+                                            </Link>
+                                        </button>
+                                    </div>
+                                ))
+                            }
+                        </div>
                     </div>
                 </Row>
             </Container>

@@ -26,18 +26,16 @@ export function MovieCarousel() {
     }, [])
 
     return (
-        <div>
-            <Carousel>
-                <Carousel.Item interval={3000}>
-                    <CarouselItem poster={posters[0]} />
-                </Carousel.Item>
-                <Carousel.Item interval={3000}>
-                    <CarouselItem poster={posters[1]} />
-                </Carousel.Item>
-                <Carousel.Item interval={3000}>
-                    <CarouselItem poster={posters[2]} />
-                </Carousel.Item>
-            </Carousel>
-        </div>
+        <Carousel className='carousel'>
+            <Carousel.Item interval={3000}>
+                <CarouselItem poster={posters[0]} />
+            </Carousel.Item>
+            <Carousel.Item interval={3000}>
+                <CarouselItem poster={posters[1]} />
+            </Carousel.Item>
+            <Carousel.Item interval={3000}>
+                <CarouselItem poster={posters[2]} />
+            </Carousel.Item>
+        </Carousel>
     )
 }

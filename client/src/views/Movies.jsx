@@ -4,6 +4,7 @@ import { Header } from "../components/Header";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
+import Image from 'react-bootstrap/Image'
 
 
 export function Movies() {
@@ -24,19 +25,20 @@ export function Movies() {
                 setMovies(response.results)
             })
             .catch(err => console.error(err));
+
     }, [])
 
     return (
-        <div>
+        <div className="movies">
             <Header />
-            <div>
+            <div className="movies-Holder">
                 {
                     movies.map(({ poster_path, id }) => (
-                        <Card key={id}>
+                        <div className="movies-Card">
                             <Link to={`/movies/${id}`}>
-                                <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500/${poster_path}`} />
+                                <Image className="movies-Img" src={`https://image.tmdb.org/t/p/w500/${poster_path}`} />
                             </Link>
-                        </Card>
+                        </div>
                     ))
                 }
             </div>

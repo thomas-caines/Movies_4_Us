@@ -5,21 +5,19 @@ import Navbar from 'react-bootstrap/Navbar';
 
 export function Header() {
     return (
-        <div>
-            <Navbar>
-                <Container>
-                    <Navbar.Brand>
-                        Movies 4 Us
-                    </Navbar.Brand>
-                    <Navbar.Toggle />
-                    <Navbar.Collapse>
-                        <Nav>
-                            <Nav.Link href='/'>Home</Nav.Link>
-                            <Nav.Link href='/movies'>Movies</Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-        </div>
+        <Navbar className='navbar'>
+            <Container>
+                <Navbar.Brand className='navbar-Brand'>
+                    Movies 4 Us
+                </Navbar.Brand>
+                <Navbar.Toggle />
+                <Navbar.Collapse>
+                    <Nav>
+                        <Nav.Link className='navbar-Link' href='/'>Home</Nav.Link>
+                        <Nav.Link className='navbar-Link' href='/movies'>Movies</Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     )
 }
